@@ -48,14 +48,14 @@ async function generateInterviewReportController(req, res) {
         console.log(JSON.stringify(interviewReportByAi, null, 2))
 
         // Create interview report in database
-        const interviewReport = await interviewReportModel.create({
-            user: req.user.id,
-            resume: resumeContent,
-            selfDescription,
-            jobDescription,
-            hasGeneratedResume: hasResume, // Track if resume was uploaded for later resume generation
-            ...interviewReportByAi
-        })
+       const interviewReport = await interviewReportModel.create({
+    user: req.user.id,
+    resume: resumeContent,
+    selfDescription,
+    jobDescription,
+    ...interviewReportByAi,
+    hasGeneratedResume: false
+})
 
         res.status(201).json({
             message: "Interview Report Generated Successfully",
